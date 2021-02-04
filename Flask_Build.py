@@ -19,13 +19,8 @@ from GetFixtres import ECS_data
 from GetFixtures2 import GK_roi
 
 
-
+#Initializing flask app
 app = Flask(__name__)
-
-
-
-
-
 
 #Pandas Page
 @app.route('/pandas', methods=("POST", "GET"))
@@ -35,14 +30,13 @@ def GK():
                            table=[GK_roi.to_html(classes='data', index = False)], titles= GK_roi.columns.values)
 
 
-
 #Matplotlib page
 @app.route('/matplot', methods=("POST", "GET"))
 def mpl():
     return render_template('matplot.html',
                            PageTitle = "Here's how easy it is to show a plot")
 
-
+#creating image on the fly
 @app.route('/plot.png')
 def plot_png():
     fig = create_figure()
@@ -64,7 +58,6 @@ def create_figure():
 
     
     return fig
-
 
 if __name__ == '__main__':
     app.run(debug = True)
