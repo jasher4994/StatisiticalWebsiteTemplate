@@ -1,3 +1,6 @@
+"""  HOW TO HOST PANDAS AND MATPLOTLIB ONLINE TEMPLATE"""
+
+
 #Flask imports
 from flask import Flask, render_template, send_file, make_response, url_for 
 from flask import Response
@@ -15,28 +18,33 @@ import io
 import random
 
 #Data imports
-from GetFixtres import ECS_data
-from GetFixtures2 import GK_roi
+
+#from GetFixtres import ECS_data
+ECS_data = pd.read_csv("ECS_data.csv")
+#from GetFixtures2 import GK_roi
+GK_roi = pd.read_csv("GK_roi.csv")
 
 
-#Initializing flask app
+
 app = Flask(__name__)
 
 #Pandas Page
+@app.route('/')
 @app.route('/pandas', methods=("POST", "GET"))
 def GK():
     return render_template('pandas.html',
-                           PageTitle = "Goalkeepers Data",
+                           PageTitle = "Pandas",
                            table=[GK_roi.to_html(classes='data', index = False)], titles= GK_roi.columns.values)
+
 
 
 #Matplotlib page
 @app.route('/matplot', methods=("POST", "GET"))
 def mpl():
     return render_template('matplot.html',
-                           PageTitle = "Here's how easy it is to show a plot")
+                           PageTitle = "Matplotlib")
 
-#creating image on the fly
+
 @app.route('/plot.png')
 def plot_png():
     fig = create_figure()
@@ -58,6 +66,7 @@ def create_figure():
 
     
     return fig
+
 
 if __name__ == '__main__':
     app.run(debug = True)
