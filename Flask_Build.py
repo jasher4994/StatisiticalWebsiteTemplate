@@ -21,10 +21,11 @@ import random
 
 #from GetFixtres import ECS_data
 ECS_data = pd.read_csv("ECS_data.csv")
+#ECS_data = pd.read_csv("/home/jasher4994/mysite/ECS_data.csv")
+
 #from GetFixtures2 import GK_roi
 GK_roi = pd.read_csv("GK_roi.csv")
-
-
+#GK_roi = pd.read_csv("/home/jasher4994/mysiteGK_roi.csv")
 
 app = Flask(__name__)
 
